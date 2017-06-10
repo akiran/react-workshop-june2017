@@ -6,12 +6,21 @@ export default class TodoInput extends React.Component {
     this.state = {
       newTodo: ''
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleNewTodoKeyDown = this.handleNewTodoKeyDown.bind(this)
   }
-  handleNewTodoKeyDown() {
-
+  handleNewTodoKeyDown(e) {
+    if (e.key === 'Enter') {
+      this.props.addTodo(this.state.newTodo)
+      this.setState({
+        newTodo: ''
+      })
+    }
   }
-  handleChange() {
-
+  handleChange(e) {
+    this.setState({
+      newTodo: e.target.value
+    })
   }
   render() {
     return (
