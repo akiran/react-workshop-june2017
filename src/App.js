@@ -17,6 +17,7 @@ class App extends Component {
     }
     this.addTodo = this.addTodo.bind(this)
     this.deleteTodo = this.deleteTodo.bind(this)
+    this.toggleTodo = this.toggleTodo.bind(this)
   }
   addTodo(title) {
     this.setState({
@@ -32,14 +33,29 @@ class App extends Component {
       todos: this.state.todos.filter(todo => todo.id !== id)
     })
   }
+  toggleTodo(id) {
+    this.setState({
+      todos: this.state.todos.map(todo => {
+        return {
+          ...todo,
+          completed: (todo.id === id) ? !todo.completed : todo.completed
+        }
+      })
+    })
+  }
   render() {
+
     return (
       <div>
         <header className="header">
           <h1>todos</h1>
           <TodoInput addTodo={this.addTodo}/>
         </header>
-        <TodoList todos={this.state.todos} deleteTodo={this.deleteTodo} />
+        <TodoList
+          todos={this.state.todos}
+          deleteTodo={this.deleteTodo}
+          toggleTodo={this.toggleTodo}
+        />
         <TodoFooter count={this.state.todos.length} />
       </div>
     );
