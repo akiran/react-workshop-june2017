@@ -5,7 +5,7 @@ import classNames from 'classnames'
 export default class TodoFooter extends React.Component {
   render() {
     const nowShowing = 'all'
-    const activeTodoWord = ''
+    const activeTodoWord = this.props.count === 1 ? 'item' : 'items'
     return (
       <footer className="footer">
 					<span className="todo-count">

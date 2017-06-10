@@ -34,7 +34,7 @@ class App extends Component {
           <TodoInput addTodo={this.addTodo}/>
         </header>
         <TodoList todos={this.state.todos} />
-        <TodoFooter />
+        <TodoFooter count={this.state.todos.length} />
       </div>
     );
   }
