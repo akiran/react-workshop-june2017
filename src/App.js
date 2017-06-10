@@ -3,6 +3,7 @@ import 'todomvc-common/base.css'
 import 'todomvc-app-css/index.css'
 import TodoInput from './TodoInput'
 import TodoList from './TodoList'
+import TodoFooter from './TodoFooter'
 
 class App extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class App extends Component {
           <TodoInput />
         </header>
         <TodoList todos={this.state.todos} />
+        <TodoFooter />
       </div>
     );
   }
