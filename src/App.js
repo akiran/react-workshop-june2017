@@ -17,10 +17,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1 className="header">
-          todos
+        <header className="header">
+          <h1>todos</h1>
           <TodoInput />
-        </h1>
+        </header>
         <TodoList todos={this.state.todos} />
       </div>
     );
