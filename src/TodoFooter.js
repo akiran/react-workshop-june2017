@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 export default class TodoFooter extends React.Component {
   render() {
-    const nowShowing = 'all'
+    const {todoFilter, setTodoFilter} = this.props
     const activeTodoWord = this.props.count === 1 ? 'item' : 'items'
     return (
       <footer className="footer">
@@ -14,24 +14,24 @@ export default class TodoFooter extends React.Component {
 					<ul className="filters">
 						<li>
 							<a
-								href="#/"
-								className={classNames({selected: nowShowing === 'all'})}>
+                onClick={setTodoFilter.bind(this, 'all')}
+								className={classNames({selected: todoFilter === 'all'})}>
 									All
 							</a>
 						</li>
 						{' '}
 						<li>
 							<a
-								href="#/active"
-								className={classNames({selected: nowShowing === 'active'})}>
+                onClick={setTodoFilter.bind(this, 'active')}
+								className={classNames({selected: todoFilter === 'active'})}>
 									Active
 							</a>
 						</li>
 						{' '}
 						<li>
 							<a
-								href="#/completed"
-								className={classNames({selected: nowShowing === 'completed'})}>
+                onClick={setTodoFilter.bind(this, 'completed')}
+								className={classNames({selected: todoFilter === 'completed'})}>
 									Completed
 							</a>
 						</li>

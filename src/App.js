@@ -6,6 +6,15 @@ import TodoList from './TodoList'
 import TodoFooter from './TodoFooter'
 import uuid from 'uuid/v4'
 
+function filterTodos(todos, filter) {
+  switch  (filter) {
+    case 'all': return todos
+    case 'active': return todos.filter(todo => !todo.completed)
+    case 'completed': return todos.filter(todo => todo.completed)
+    default: return todos
+  }
+}
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -13,11 +22,13 @@ class App extends Component {
       todos: [
         {id: uuid(), title: 'learn react', completed: false},
         {id: uuid(), title: 'learn javascript', completed: false}
-      ]
+      ],
+      todoFilter: 'all'
     }
     this.addTodo = this.addTodo.bind(this)
     this.deleteTodo = this.deleteTodo.bind(this)
     this.toggleTodo = this.toggleTodo.bind(this)
+    this.setTodoFilter = this.setTodoFilter.bind(this)
   }
   addTodo(title) {
     this.setState({
@@ -43,8 +54,12 @@ class App extends Component {
       })
     })
   }
+  setTodoFilter(todoFilter) {
+    this.setState({todoFilter})
+  }
   render() {
-
+    const activeTodos= filterTodos(this.state.todos, 'active')
+    const filteredTodos = filterTodos(this.state.todos, this.state.todoFilter)
     return (
       <div>
         <header className="header">
@@ -52,11 +67,14 @@ class App extends Component {
           <TodoInput addTodo={this.addTodo}/>
         </header>
         <TodoList
-          todos={this.state.todos}
+          todos={filteredTodos}
           deleteTodo={this.deleteTodo}
           toggleTodo={this.toggleTodo}
         />
-        <TodoFooter count={this.state.todos.length} />
+        <TodoFooter
+          count={activeTodos.length}
+          todoFilter={this.state.todoFilter}
+          setTodoFilter={this.setTodoFilter} />
       </div>
     );
   }
