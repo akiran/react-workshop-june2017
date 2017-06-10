@@ -5,19 +5,20 @@ export default class TodoItem extends React.Component {
 
   }
   render() {
+    const {todo, deleteTodo} = this.props
     return (
       <li className=''>
         <div className="view">
 						<input
 							className="toggle"
 							type="checkbox"
-							checked={this.props.todo.completed}
+							checked={todo.completed}
 							onChange={this.props.onToggle}
 						/>
 						<label onDoubleClick={this.handleEdit}>
-							{this.props.todo.title}
+							{todo.title}
 						</label>
-						<button className="destroy" onClick={this.props.onDestroy} />
+						<button className="destroy" onClick={deleteTodo.bind(this, todo.id)} />
 					</div>
       </li>
     )

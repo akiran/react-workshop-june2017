@@ -16,6 +16,7 @@ class App extends Component {
       ]
     }
     this.addTodo = this.addTodo.bind(this)
+    this.deleteTodo = this.deleteTodo.bind(this)
   }
   addTodo(title) {
     this.setState({
@@ -26,6 +27,11 @@ class App extends Component {
       })
     })
   }
+  deleteTodo(id) {
+    this.setState({
+      todos: this.state.todos.filter(todo => todo.id !== id)
+    })
+  }
   render() {
     return (
       <div>
@@ -33,7 +39,7 @@ class App extends Component {
           <h1>todos</h1>
           <TodoInput addTodo={this.addTodo}/>
         </header>
-        <TodoList todos={this.state.todos} />
+        <TodoList todos={this.state.todos} deleteTodo={this.deleteTodo} />
         <TodoFooter count={this.state.todos.length} />
       </div>
     );
